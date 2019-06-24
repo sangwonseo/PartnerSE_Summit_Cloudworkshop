@@ -8,20 +8,16 @@ vsphere_datastore: VMWare_Datastore
 guest_network1: VM Network
 guest_network2: VM Network
 guest_id: centos7_64Guest
-guest_memory: 2048  
-guest_vcpu: 2
-guest_template: ci_au_vm_host 
+guest_memory: 1024  
+guest_vcpu: 1
+guest_template: ci_au_vm
 vms:
-  master:
-    vmhost: k8s_master
+  linux02:
+    vmhost: On-Prem-linux02
     vmip1: 49.254.105.183
-    vmip2: 10.10.1.11
-  node1:
-    vmhost: k8s_node1
+  linux03:
+    vmhost: On-Prem-linux03
     vmip1: 49.254.105.184
-    vmip2: 10.10.1.12
-  node2:
-    vmhost: k8s_node2
+  linux04:
+    vmhost: On-Prem-linux04
     vmip1: 49.254.105.185
-    vmip2: 10.10.1.13
-© 2019 GitHub, Inc.
