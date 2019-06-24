@@ -1,0 +1,27 @@
+vsphere_host: 49.254.105.42
+vsphere_user: administrator@vsphere.local
+vsphere_password: Netapp123!
+vsphere_datacenter: CDS_NetApp_KR
+esxi_hostname: 49.254.105.40
+vsphere_folder: Discovered virtual machine
+vsphere_datastore: VMWare_Datastore
+guest_network1: VM Network
+guest_network2: VM Network
+guest_id: centos7_64Guest
+guest_memory: 2048  
+guest_vcpu: 2
+guest_template: ci_au_vm_host 
+vms:
+  master:
+    vmhost: k8s_master
+    vmip1: 49.254.105.183
+    vmip2: 10.10.1.11
+  node1:
+    vmhost: k8s_node1
+    vmip1: 49.254.105.184
+    vmip2: 10.10.1.12
+  node2:
+    vmhost: k8s_node2
+    vmip1: 49.254.105.185
+    vmip2: 10.10.1.13
+© 2019 GitHub, Inc.
