@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  vars_files:
+  - env_variables
+  tasks:
+  - name: create the VM
+    vmware_guest:
+      hostname: '{{ vsphere_host }}'
+      username: '{{ vsphere_user }}'
+      password: '{{ vsphere_password }}'
+      validate_certs: false
+      esxi_hostname: '{{ esxi_hostname }}' 
+      datacenter: '{{ vsphere_datacenter }}'
+      folder: '{{ vsphere_folder  }}'
+      name: '{{ item.value.vmhost }}'
+      state: poweredon
+      guest_id: '{{ guest_id }}'
+      disk:
+      - size_gb: 50
+        type: thin
+        datastore: '{{ vsphere_datastore }}'
+      networks:
+      - name: '{{ guest_network1 }}'
+        ip: '{{ item.value.vmip1 }}'
+        netmask: 255.255.255.0
+        gateway: 49.254.105.1
+        dns_servers:
+        - 8.8.8.8
+        - 168.126.63.1
+      - name: '{{ guest_network2 }}'
+        ip: '{{ item.value.vmip2 }}'
+        netmask: 255.255.255.0
+        gateway: 10.10.1.1 
+        dns_servers:
+        - 8.8.8.8
+        - 168.126.63.1        
+      hardware:
+        memory_mb: '{{ guest_memory }}'
+        num_cpus: '{{ guest_vcpu }}'
+      customization:
+        dns_servers:
+        - 8.8.8.8
+        - 168.126.63.1 
+        domain : vsphere.local
+        hostname: '{{ item.value.vmhost }}'
+      template: '{{  guest_template  }}'
+    with_dict: '{{ vms }}'
